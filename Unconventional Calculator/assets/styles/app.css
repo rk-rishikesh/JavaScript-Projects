@@ -24,10 +24,10 @@ header {
   margin: 2rem auto;
   width: 40rem;
   max-width: 90%;
-  border: 1px solid #023d6d;
+  border: 1px solid #062341;
   border-radius: 10px;
   padding: 1rem;
-  color: #023d6d;
+  color: #062341;
 }
 
 #results {
@@ -52,9 +52,9 @@ header {
 
 #calculator button {
   font: inherit;
-  background: #023d6d;
+  background: #48a0e7;
   color: white;
-  border: 1px solid #023d6d;
+  border: 1px solid #48a0e7;
   padding: 1rem;
   cursor: pointer;
 }
@@ -65,8 +65,8 @@ header {
 
 #calculator button:hover,
 #calculator button:active {
-  background: #084f88;
-  border-color: #084f88;
+  background: #092e4d;
+  border-color: #092e4d;
 }
 
 #calc-actions button {
