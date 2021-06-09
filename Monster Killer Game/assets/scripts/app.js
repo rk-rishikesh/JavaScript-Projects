@@ -98,10 +98,8 @@ function writeToLog(_event, _value, _playerHealth, _monsterHealth) {
     };
   } else if (_event === LOG_EVENT_MONSTER_ATTACK) {
     logEntry = {
-      event: _event,
-      damage: _value,
-      target: "PLAYER",
-      playerHealth: _playerHealth,
+      
+      h,
       monsterHealth: _monsterHealth,
     };
   } else if (_event === LOG_EVENT_GAME_OVER) {
