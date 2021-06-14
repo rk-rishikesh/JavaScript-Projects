@@ -23,18 +23,45 @@ let movieCount = 0;
 //Accessing Entry text section
 const entryTextSection = document.getElementById("entry-text");
 
+//Accessing Delete Modal
+const deleteMovieModal = document.getElementById("delete-modal");
+    //Access No Button
+  const doNotDelete = deleteMovieModal.querySelector(".btn--passive");
+  //Access Yes Button
+  const deleteMovie = deleteMovieModal.querySelector(".btn--danger");
 //  FUNCTIONS
 
-const deleteMoviehandler = (movieId) => {
-    movies.splice(movieId, 1);
-    const movieListInitializer = document.getElementById('movie-list');
-    movieListInitializer.children[movieId].remove();
-    console.log(movies)
+const deleteBackdrophandler = () => {
+    removeDeleteWarning();
+} 
+
+const removeDeleteWarning = () => {
+    deleteMovieModal.classList.remove("visible");
 }
+
+const warningHandler = (id) => {
+  deleteMovieModal.classList.add("visible");
+  console.log(id);
+
+  doNotDelete.addEventListener('click', removeDeleteWarning);
+  deleteMovie.addEventListener('click', deleteMoviehandler.bind(null, id));
+};
+
+
+const deleteMoviehandler = (movieId) => {
+  console.log(movieId)
+  
+  const movieListInitializer = document.getElementById("movie-list");
+  movieListInitializer.children[movieId].remove();
+  movies.splice(movieId, 1);
+  console.log(movies);
+  removeDeleteWarning();
+  updateUI();
+};
 
 const renderMovieList = (id, title, imageURL, rating) => {
   const newMovieElement = document.createElement("li");
-  newMovieElement.className = "movie-element"; 
+  newMovieElement.className = "movie-element";
   newMovieElement.innerHTML = `
     <div class="movie-element__image">
         <img src="${imageURL}" alt="${title}">
@@ -45,10 +72,10 @@ const renderMovieList = (id, title, imageURL, rating) => {
     </div>
     `;
 
-    const movieListInitializer = document.getElementById('movie-list');//check index.html
-    movieListInitializer.append(newMovieElement)
+  const movieListInitializer = document.getElementById("movie-list"); //check index.html
+  movieListInitializer.append(newMovieElement);
 
-    newMovieElement.addEventListener('click', deleteMoviehandler.bind(null, id))
+  newMovieElement.addEventListener("click", warningHandler.bind(null, id));
 };
 
 const updateUI = () => {
@@ -63,12 +90,14 @@ const updateUI = () => {
 
 const toggleBackdrop = () => {
   addBackdropModal.classList.toggle("visible");
+  clearInputSection();
 };
 
 const toggleMovieModal = () => {
   addMovieModal.classList.toggle("visible");
   //Make background dark and fix - backdrop
   toggleBackdrop();
+  
 };
 
 //Dismiss when clicked on screen
@@ -120,7 +149,12 @@ const addMovieButtonHandler = () => {
   console.log(movies);
   toggleMovieModal();
   clearInputSection();
-  renderMovieList(newMovie.id, newMovie.title, newMovie.imageURL, newMovie.rating);
+  renderMovieList(
+    newMovie.id,
+    newMovie.title,
+    newMovie.imageURL,
+    newMovie.rating
+  );
   updateUI();
 };
 
